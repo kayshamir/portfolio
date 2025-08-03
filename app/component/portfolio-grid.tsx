@@ -117,9 +117,9 @@ export default function PortfolioGrid() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-background rounded-3xl overflow-hidden hover-lift transition-all duration-300 ease-in-out border border-gray-300 hover:border-primary/10"
+                className="bg-background rounded-lg overflow-hidden hover-lift transition-all duration-300 ease-in-out border border-gray-300 hover:border-primary/10"
               >
-                <div className="relative h-64 overflow-hidden rounded-t-2xl bg-gray-100">
+                <div className="relative h-64 overflow-hidden rounded-t-lg bg-gray-100">
                   {project.mediaType === "video" ? (
                     <video
                       src={project.mediaUrl}
