@@ -40,9 +40,15 @@ export default function Home() {
     },
     {
       date: "August 2023",
-      title: "Technical Support at Amazon.com",
+      title: "Communications Officer",
       description:
-        "Contributed to campus projects and refined visual design fundamentals.",
+        "PSITS - CTU Main Campus",
+    },
+    {
+      date: "August 2023",
+      title: "Technical Support",
+      description:
+        "Amazon.com",
     },
     {
       date: "May 2023",
@@ -59,10 +65,12 @@ export default function Home() {
   ];
 
   const techStack = [
-    "React", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "Notion", "ShadCN", "TweakCN", 
-    "JavaScript", "HTML", "CSS", "Node.js", "Git", "VS Code", "Aceternity", "Magic UI", "PHP", "Laravel", 
-    "MySQL", "XML", "Github", "React Native", "Firebase", "PostgreSQL", "ASP.NET", "Vite", "Prettier", "Tailwind CSS",
-    "Postman", 
+    "JavaScript", "TypeScript", "HTML", "CSS", "PHP", "Node.js", "Laravel", "ASP.NET",
+    "React", "Next.js", "React Native", "Vite",
+    "MySQL", "PostgreSQL", "Firebase", "XML",
+    "Tailwind CSS", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI", "OpenMeteo", "Open Router",
+    "Figma", "Canva",
+    "Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams"
   ];
 
   return (
