@@ -112,10 +112,22 @@ export default function Home() {
               <Moon className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
             </div>
             <div className="flex flex-col md:flex-row justify-center md:justify-end gap-2 w-full">
-              <Button className="gap-2 w-full md:w-auto flex items-center justify-center">
+              <Button 
+                className="gap-2 w-full md:w-auto flex items-center justify-center cursor-pointer" 
+                onClick={() => window.open("https://m.me/kxyshxmxr", "_blank")}
+              >
                 <FaFacebook /> Send a Message
               </Button>
-              <Button variant="secondary" className="gap-2 w-full md:w-auto flex items-center justify-center">
+              <Button 
+                variant="secondary" 
+                className="gap-2 w-full md:w-auto flex items-center justify-center cursor-pointer"
+                onClick={() =>
+                  window.open(
+                    "https://mail.google.com/mail/?view=cm&fs=1&to=kayshamirbesin04@gmail.com&su=Hello&body=This%20is%20a%20test%20email",
+                    "_blank"
+                  )
+                }
+                >
                 <Mail /> Send Email
               </Button>
             </div>
