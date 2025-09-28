@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { BookOpenText, Briefcase, Cpu, Mail, MapPin, StarHalf, Sun } from "lucide-react";
+import { BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
 import shamir from "@/public/shamir.jpg";
@@ -65,7 +65,7 @@ export default function Home() {
   ];
 
   const techStack = [
-    "JavaScript", "TypeScript", "HTML", "CSS", "PHP", "Node.js", "Laravel", "ASP.NET",
+    "JavaScript", "TypeScript", "HTML", "CSS", "PHP", "Node.js", "Laravel", "ASP.NET", 
     "React", "Next.js", "React Native", "Vite",
     "MySQL", "PostgreSQL", "Firebase", "XML",
     "Tailwind CSS", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI", "OpenMeteo", "Open Router",
@@ -89,7 +89,7 @@ export default function Home() {
               />
             </div>
             <div className="flex flex-col gap-2 justify-start items-center sm:items-start w-full">
-              <div className="flex flex-row gap-2 items-center flex-wrap justify-center sm:justify-start">
+              <div className="flex flex-row gap-1 items-center flex-wrap justify-center sm:justify-start">
                 <h1 className="text-xl sm:text-2xl font-bold text-secondary-foreground text-center sm:text-left">
                   Kay Shamir L. Besin
                 </h1>
@@ -145,7 +145,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
               <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
-                <Briefcase className="w-4 h-4 mr-1" /> About Me
+                <User className="w-4 h-4 mr-1" /> About Me
               </div>
               <div className="text-xs text-foreground flex flex-col space-y-1 leading-relaxed">
                 <p>
@@ -159,8 +159,8 @@ export default function Home() {
                 </p>
                 <span className="opacity-60 text-xs"></span>
                 <p>
-                  Outside of work, I love exploring new design trends and sharing knowledge with others. My goal is to contribute to meaningful projects and keep pushing my creative and technical boundaries.
-                  In my free time, I also enjoy connecting with like-minded individuals and participating in community events.
+                  I love exploring new design trends and sharing knowledge with others. My goal is to contribute to meaningful projects and keep pushing my creative and technical boundaries.
+                  In my free time, I also enjoy connecting with like minded individuals and participating in community events.
                 </p>
               </div>
             </div>
@@ -203,6 +203,16 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
+              <FolderOpen className="w-4 h-4 mr-1" /> Projects
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
             </div>
           </div>
         </div>
