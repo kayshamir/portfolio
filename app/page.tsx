@@ -211,8 +211,13 @@ export default function Home() {
             <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
               <FolderOpen className="w-4 h-4 mr-1" /> Projects
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               
+            </div> */}
+            <div className="flex-row items-center justify-center">
+              <p>
+                Still deep in my capstone grind, let me relax and get some fresh air to post my projects here hehhe😊
+              </p>
             </div>
           </div>
         </div>
