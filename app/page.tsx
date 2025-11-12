@@ -214,10 +214,15 @@ export default function Home() {
             {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               
             </div> */}
-            <div className="flex-row items-center justify-center">
-              <p>
-                Still deep in my capstone grind, let me relax and get some fresh air to post my projects here hehhe😊
-              </p>
+            <div className="flex flex-col items-center justify-center py-8">
+              <div className="text-4xl mb-2">💜</div>
+              <div className="text-md font-bold text-secondary-foreground flex items-center gap-2">
+                Still cooking something awesome...
+              </div>
+              <div className="text-xs text-foreground/70 text-center">
+                Hold tight! I’m still working on my capstone right now 🧠💻<br />
+                All projects will be posted once it’s finally done (and I survive it 😅).
+              </div>
             </div>
           </div>
         </div>
