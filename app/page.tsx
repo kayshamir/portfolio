@@ -5,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import shamir from "@/public/shamir.jpg";
 import { Badge } from "@/components/ui/badge";
 import { FaFacebook } from "react-icons/fa";
@@ -14,18 +15,50 @@ export default function Home() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const hour = new Date().getHours();
-    const darkNow = hour >= 18 || hour < 6;
-    setIsDark(darkNow);
-    document.documentElement.classList.toggle("dark", darkNow);
+    const savedTheme = localStorage.getItem("theme");
+    const isDarkMode = savedTheme === "dark";
+    setIsDark(isDarkMode);
+    document.documentElement.classList.toggle("dark", isDarkMode);
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "theme") {
+        const newTheme = e.newValue === "dark";
+        setIsDark(newTheme);
+        document.documentElement.classList.toggle("dark", newTheme);
+      }
+    };
+
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const newTheme = customEvent.detail as boolean;
+      setIsDark(newTheme);
+      document.documentElement.classList.toggle("dark", newTheme);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("themeChange", handleThemeChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("themeChange", handleThemeChange);
+    };
   }, []);
 
   const handleThemeToggle = (val: boolean) => {
     setIsDark(val);
     document.documentElement.classList.toggle("dark", val);
+    localStorage.setItem("theme", val ? "dark" : "light");
+    
+    window.dispatchEvent(new CustomEvent("themeChange", { detail: val }));
   };
 
   const timeline = [
+    {
+      date: "January 2026",
+      title: "UI/UX Workshop Speaker",
+      description:
+        "Presented UI/UX design strategies and prototyping tools. Google Developers Group - CTU Main Campus.",
+    },
     {
       date: "February 2025",
       title: "Associate UI/UX Lead",
@@ -37,6 +70,12 @@ export default function Home() {
       title: "UI/UX Enthusiast",
       description:
         "Built concept apps, practiced wireframing, and ran quick user tests.",
+    },
+    {
+      date: "March 2024",
+      title: "Friends of the Frame: Community Kickoff 2024",
+      description:
+        "Participated in The Frame: Breaking into UI/UX Design.",
     },
     {
       date: "August 2023",
@@ -54,7 +93,7 @@ export default function Home() {
       date: "May 2023",
       title: "Student Projects",
       description:
-        "Contributed to campus projects and refined visual design fundamentals.",
+        "Worked on various course projects and refined visual design fundamentals.",
     },
     {
       date: "September 2022",
@@ -64,13 +103,35 @@ export default function Home() {
     },
   ];
 
-  const techStack = [
-    "JavaScript", "TypeScript", "HTML", "CSS", "PHP", "Node.js", "Laravel", "ASP.NET", 
-    "React", "Next.js", "React Native", "Vite",
-    "MySQL", "PostgreSQL", "Firebase", "XML",
-    "Tailwind CSS", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI", "OpenMeteo", "Open Router",
-    "Figma", "Canva",
-    "Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams"
+  const lang = ["JS", "TS", "HTML", "CSS", "PHP", "XML"];
+  const frame = ["Node", "Laravel", "ASP.NET", "React", "Next", "RN", "Vite"];
+  const db = ["MySQL", "Postgres", "Firebase", "Supabase", "Railway"];
+  const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
+  const api = ["OpenMeteo", "Open Router"];
+  const design = ["Figma", "Canva"];
+  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams"];
+
+  const projects = [
+    {
+      title: "Philippines Earthquake Monitoring Map",
+      technologies: "React, TypeScript, Tailwind, Python, Flask, BeautifulSoup4",
+      image: "/eq.png",
+      imageAlt: "Philippines Earthquake Monitoring Map Demo",
+      description: "A map visualization of earthquake data in the Philippines. Features real-time earthquake data and a search function.",
+      githubUrl: "https://github.com/KayShamir/seismic-map",
+      websiteUrl: "https://seismic-map-pink.vercel.app/",
+      hasWebsite: true,
+    },
+    {
+      title: "Disaster and Risk Management System",
+      technologies: "React, TypeScript, Python, Flask, BeautifulSoup4, PostgreSQL, Windy.com, OpenMeteo, Gemini 2-5 Flash",
+      image: "/drms.png",
+      imageAlt: "Disaster and Risk Management System Demo",
+      description: "A web application for disaster and risk management. Features Hazard, Risk, Disaster, Evacuation Sites, Weather, and more.",
+      demoUrl: "/drms",
+      githubUrl: "#",
+      hasWebsite: false,
+    },
   ];
 
   return (
@@ -178,20 +239,65 @@ export default function Home() {
               <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
                 <Cpu className="w-4 h-4 mr-1" /> Tech Stack
               </div>
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((tech, idx) => (
-                  <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                    {tech}
-                  </Badge>
-                ))}
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold text-xs text-secondary-foreground mb-1">Languages</p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {lang.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="font-semibold text-xs text-secondary-foreground mb-1">Frameworks</p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {frame.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="font-semibold text-xs text-secondary-foreground mb-1">Databases</p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {db.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="font-semibold text-xs text-secondary-foreground mb-1">UI & Design</p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {ui.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                  {design.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="font-semibold text-xs text-secondary-foreground mb-1">APIs & Tools</p>
+                <div className="flex flex-wrap gap-2">
+                  {api.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                  {tool.map((tech, idx) => (
+                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
             <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
-              <Briefcase className="w-4 h-4 mr-1" /> Experience
+              <Briefcase className="w-4 h-4 mr-1" /> Engagements
             </div>
-            <div className="">
+            <div className="mt-2">
               <ul className="space-y-3">
                 {timeline.map((item, idx) => (
                   <li key={idx} className="group grid grid-cols-[16px_1fr] gap-3 relative">
@@ -221,9 +327,84 @@ export default function Home() {
             <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
               <FolderOpen className="w-4 h-4 mr-1" /> Projects
             </div>
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              
-            </div> */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+              {projects.map((project, idx) => (
+                <div key={idx} className="flex flex-col bg-secondary/30 border border-secondary rounded-lg p-4 transition-all space-y-3 hover:bg-secondary/40">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-semibold text-secondary-foreground text-sm leading-tight">
+                      {project.title}
+                    </h3>
+                    <div className="min-h-[2.5rem] flex items-start">
+                      <p className="text-xs text-foreground/80 leading-relaxed line-clamp-2">
+                        {project.technologies}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex w-full justify-center">
+                    <img 
+                      src={project.image}
+                      alt={project.imageAlt}
+                      className="rounded-md border w-full h-auto object-cover aspect-video"
+                    />
+                  </div>
+                  <div className="text-sm text-foreground mb-2 line-clamp-2 leading-relaxed">
+                    {project.description}
+                  </div>
+                  <div className="flex flex-row gap-2 items-center mt-auto">
+                    {project.hasWebsite ? (
+                      <>
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border font-medium hover:bg-secondary/70 transition"
+                        >
+                          GitHub
+                        </a>
+                        <span className="flex-1" />
+                        <a
+                          href={project.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-row items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-background text-primary border hover:bg-secondary/20 transition"
+                          aria-label="Visit website"
+                        >
+                          <span>Website</span>
+                          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7v8M17 7H9" />
+                          </svg>
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        {project.demoUrl?.startsWith("/") ? (
+                          <Link
+                            href={project.demoUrl}
+                            className="text-xs px-3 py-1.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition"
+                          >
+                            Demo
+                          </Link>
+                        ) : (
+                          <a
+                            href={project.demoUrl}
+                            className="text-xs px-3 py-1.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition"
+                          >
+                            Demo
+                          </a>
+                        )}
+                        <a
+                          href={project.githubUrl}
+                          className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border font-medium hover:bg-secondary/70 transition"
+                        >
+                          GitHub
+                        </a>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* 
             <div className="flex flex-col items-center justify-center py-8">
               <div className="text-4xl mb-2">💜</div>
               <div className="text-md font-bold text-secondary-foreground flex items-center gap-2">
@@ -234,6 +415,7 @@ export default function Home() {
                 All projects will be posted once it’s finally done (and I survive it 😅).
               </div>
             </div>
+            */}
           </div>
         </div>
       </div>
