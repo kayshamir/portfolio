@@ -7,7 +7,7 @@ import { Moon } from "lucide-react";
 import Image from "next/image";
 import shamir from "@/public/shamir.jpg";
 import { Badge } from "@/components/ui/badge";
-import { FaEnvelope, FaFacebook } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 import verified from "@/public/verified.png";
 
 export default function Home() {
@@ -78,14 +78,24 @@ export default function Home() {
       <div className="w-full max-w-5xl flex flex-col p-4 sm:p-6 md:p-10 rounded-lg gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 items-center sm:items-start">
-            <div className="flex-shrink-0 flex justify-center sm:justify-start">
+            <div
+              className="flex-shrink-0 flex justify-center sm:justify-start group relative"
+            >
               <Image
                 src={shamir}
                 alt="Kay Shamir"
                 width={150}
                 height={150}
                 sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
-                className="rounded-md w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover"
+                className="rounded-md border w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover transition-opacity duration-300 group-hover:opacity-0"
+              />
+              <Image
+                src="/hover.png"
+                alt="Kay Shamir (Hover)"
+                width={150}
+                height={150}
+                sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
+                className="rounded-md border w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover absolute top-0 left-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none"
               />
             </div>
             <div className="flex flex-col gap-2 justify-start items-center sm:items-start w-full">
