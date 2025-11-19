@@ -2,14 +2,29 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User } from "lucide-react";
+import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import shamir from "@/public/shamir.jpg";
 import { Badge } from "@/components/ui/badge";
 import { FaFacebook } from "react-icons/fa";
 import verified from "@/public/verified.png";
+import { 
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger, 
+} from "@/components/ui/dialog";
+import { 
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/ui/tabs";
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
@@ -131,6 +146,58 @@ export default function Home() {
       demoUrl: "/drms",
       githubUrl: "#",
       hasWebsite: false,
+    },
+  ];
+
+  const drmsModules = [
+    {
+      title: "Hazard",
+      defaultValue: "hazard",
+      icon: AlertTriangle,
+      description: "Identify and monitor potential hazards in real-time. Track natural and man-made threats.",
+      image: "/hazard.png",
+    },
+    {
+      title: "Risk",
+      defaultValue: "risk",
+      icon: Shield,
+      description: "Comprehensive risk assessment and management system. Evaluate vulnerability and exposure to various threats.",
+      image: "/risk1.png",
+    },
+    {
+      title: "Disaster",
+      defaultValue: "disaster",
+      icon: AlertCircle,
+      description: "Handle disaster recording and keep track of affected residents. Monitor disasters and resident impact with detailed analytics.",
+      image: "/affecteds.png",
+    },
+    {
+      title: "Evacuation Sites",
+      defaultValue: "evacuation",
+      icon: MapPin,
+      description: "Record keeping of evacuation sites and their locations, with the ability to add evacuees during a disaster.",
+      image: "/evacuees.png",
+    },
+    {
+      title: "Weather",
+      defaultValue: "weather",
+      icon: Cloud,
+      description: "Live weather updates and forecasts powered by the embedded Windy.com API.",
+      image: "/weather.png",
+    },
+    {
+      title: "Heatmap",
+      defaultValue: "heatmap",
+      icon: Layers,
+      description: "Shows heatmaps of disaster and risk across barangays to easily identify vulnerable areas.",
+      image: "/heatmap.png",
+    },
+    {
+      title: "Seismic",
+      defaultValue: "seismic",
+      icon: Activity,
+      description: "Monitor earthquake activity and seismic events by using BeautifulSoup4 to scrape data from the Philippine Institute of Volcanology and Seismology (PHIVOLCS).",
+      image: "/seismic.png",
     },
   ];
 
@@ -329,81 +396,107 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
               {projects.map((project, idx) => (
-                <div key={idx} className="flex flex-col bg-secondary/30 border border-secondary rounded-lg p-4 transition-all space-y-3 hover:bg-secondary/40">
+                <div key={idx} className="flex flex-col border border-secondary rounded-lg p-4 transition-all space-y-3">
                   <div className="flex flex-col gap-2">
                     <h3 className="font-semibold text-secondary-foreground text-sm leading-tight">
                       {project.title}
                     </h3>
-                    <div className="min-h-[2.5rem] flex items-start">
-                      <p className="text-xs text-foreground/80 leading-relaxed line-clamp-2">
-                        {project.technologies}
-                      </p>
-                    </div>
                   </div>
-                  <div className="flex w-full justify-center">
+                  <div className="flex w-full justify-center mt-2">
                     <img 
                       src={project.image}
                       alt={project.imageAlt}
-                      className="rounded-md border w-full h-auto object-cover aspect-video"
+                      className="rounded-md object-cover p-2 -mt-2 border bg-secondary/50"
                     />
                   </div>
-                  <div className="text-sm text-foreground mb-2 line-clamp-2 leading-relaxed">
+                  <div className="text-xs text-muted-foreground mb-2 line-clamp-2 leading-relaxed">
                     {project.description}
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.technologies.split(", ").map((tech, techIdx) => (
+                      <Badge key={techIdx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
                   </div>
                   <div className="flex flex-row gap-2 items-center mt-auto">
                     {project.hasWebsite ? (
-                      <>
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border font-medium hover:bg-secondary/70 transition"
-                        >
-                          GitHub
-                        </a>
-                        <span className="flex-1" />
-                        <a
-                          href={project.websiteUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex flex-row items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-background text-primary border hover:bg-secondary/20 transition"
-                          aria-label="Visit website"
-                        >
-                          <span>Website</span>
-                          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7v8M17 7H9" />
-                          </svg>
-                        </a>
-                      </>
+                      <a
+                        href={project.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-row items-center text-xs p-1 text-secondary-foreground cursor-pointer"
+                        aria-label="Visit website"
+                      >
+                        Visit Website <ArrowUpRight className="w-4 h-4 ml-1" />
+                      </a>
                     ) : (
-                      <>
-                        {project.demoUrl?.startsWith("/") ? (
-                          <Link
-                            href={project.demoUrl}
-                            className="text-xs px-3 py-1.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition"
-                          >
-                            Demo
-                          </Link>
-                        ) : (
-                          <a
-                            href={project.demoUrl}
-                            className="text-xs px-3 py-1.5 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/80 transition"
-                          >
-                            Demo
-                          </a>
-                        )}
-                        <a
-                          href={project.githubUrl}
-                          className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border font-medium hover:bg-secondary/70 transition"
-                        >
-                          GitHub
-                        </a>
-                      </>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button className="flex flex-row items-center text-xs p-1 text-secondary-foreground cursor-pointer">
+                            View Project <ArrowUpRight className="w-4 h-4 ml-1" />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle>Disaster and Risk Management System</DialogTitle>
+                            <DialogDescription>
+                              Comprehensive platform for disaster preparedness and response
+                            </DialogDescription>
+                          </DialogHeader>
+                          <Tabs defaultValue={drmsModules[0].defaultValue} className="w-full">
+                            <TabsList>
+                              {drmsModules.map((module) => {
+                                return (
+                                  <TabsTrigger 
+                                    key={module.defaultValue} 
+                                    value={module.defaultValue}
+                                    className="p-2"
+                                  >
+                                    <span className="hidden sm:inline p-1">{module.title}</span>
+                                  </TabsTrigger>
+                                );
+                              })}
+                            </TabsList>
+                            {drmsModules.map((module) => {
+                              const IconComponent = module.icon;
+                              return (
+                                <TabsContent key={module.defaultValue} value={module.defaultValue} className="space-y-4 border rounded-md p-4">
+                                  <div className="flex items-center gap-3">
+                                    <div className={`p-2 rounded-lg bg-secondary`}>
+                                      <IconComponent className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                      <h3 className="text-lg font-semibold text-secondary-foreground">
+                                        {module.title}
+                                      </h3>
+                                    </div>
+                                  </div>
+                                  <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-secondary bg-secondary/30">
+                                    <Image
+                                      src={module.image}
+                                      alt={`${module.title} Module`}
+                                      fill
+                                      className="object-cover w-full h-full"
+                                    />
+                                  </div>
+                                  <p className="text-sm text-foreground leading-relaxed">
+                                    {module.description}
+                                  </p>
+                                </TabsContent>
+                              );
+                            })}
+                          </Tabs>
+                        </DialogContent>
+                      </Dialog>
                     )}
                   </div>
                 </div>
               ))}
             </div>
+
+
+
             {/* 
             <div className="flex flex-col items-center justify-center py-8">
               <div className="text-4xl mb-2">💜</div>
