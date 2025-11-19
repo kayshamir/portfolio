@@ -119,7 +119,7 @@ export default function Home() {
   ];
 
   const lang = ["JS", "TS", "HTML", "CSS", "PHP", "XML"];
-  const frame = ["Node", "Laravel", "ASP.NET", "React", "Next", "RN", "Vite"];
+  const frame = ["Node", "Laravel", "ASP.NET", "React", "React Native", "Next", "RN", "Vite"];
   const db = ["MySQL", "Postgres", "Firebase", "Supabase", "Railway"];
   const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
   const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral"];
@@ -138,6 +138,7 @@ export default function Home() {
       visitWebsite: false,
       viewProject: true,
       isFavorite: true,
+      isMobile: false,
     },
     {
       title: "Philippines Earthquake Monitoring Map",
@@ -150,6 +151,7 @@ export default function Home() {
       visitWebsite: true,
       viewProject: false,
       isFavorite: true,
+      isMobile: false,
     },
     {
       title: "K&T Movers",
@@ -162,6 +164,7 @@ export default function Home() {
       visitWebsite: false,
       viewProject: false,
       isFavorite: false,
+      isMobile: false,
     },
     {
       title: "CTU Attendance and Course Management System",
@@ -174,6 +177,7 @@ export default function Home() {
       visitWebsite: false,
       viewProject: false,
       isFavorite: false,
+      isMobile: false,
     },
     {
       title: "Shoes Store",
@@ -186,6 +190,7 @@ export default function Home() {
       visitWebsite: false,
       viewProject: false,
       isFavorite: false,
+      isMobile: false,
     },
     {
       title: "Cinephil",
@@ -198,6 +203,33 @@ export default function Home() {
       visitWebsite: false,
       viewProject: false,
       isFavorite: false,
+      isMobile: false,
+    },
+    {
+      title: "BarangMI",
+      technologies: "React Native, TypeScript, TailwindCSS, PostgreSQL",
+      image: "/phon1.png",
+      imageAlt: "BarangMI Mobile Application",
+      description: "A mobile application of BarangMI to manage request of the residents in a barangay.",
+      demoUrl: "/hagoc",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+      isFavorite: false,
+      isMobile: true,
+    },
+    {
+      title: "Hagoc",
+      technologies: "React Native, TypeScript, TailwindCSS, Expo, Supabase",
+      image: "/phon2.png",
+      imageAlt: "Cinephil Web Application",
+      description: "A mobile application for sleeping hours tracking and analysis.",
+      demoUrl: "/hagoc",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+      isFavorite: false,
+      isMobile: true,
     },
   ];
 
@@ -463,7 +495,7 @@ export default function Home() {
                     <img 
                       src={project.image}
                       alt={project.imageAlt}
-                      className="rounded-md object-cover p-2 -mt-2 bg-secondary/50"
+                      className={`rounded-md p-2 -mt-2 bg-secondary/50 w-full ${project.isMobile ? "object-contain h-60 sm:h-65" : "object-cover"}`}
                     />
                   </div>
                   <div className="text-xs text-muted-foreground mb-2 line-clamp-2 leading-relaxed">
