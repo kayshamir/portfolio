@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star } from "lucide-react";
+import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
-import shamir from "@/public/shamir.jpg";
+import shamir from "@/public/images/shamir.jpg";
 import { Badge } from "@/components/ui/badge";
 import { FaFacebook } from "react-icons/fa";
-import verified from "@/public/verified.png";
+import verified from "@/public/images/verified.png";
 import { 
   Dialog,
   DialogClose,
@@ -118,19 +118,19 @@ export default function Home() {
     },
   ];
 
-  const lang = ["JS", "TS", "HTML", "CSS", "PHP", "XML"];
-  const frame = ["Node", "Laravel", "ASP.NET", "React", "React Native", "Next", "RN", "Vite"];
+  const lang = ["JS", "TS", "HTML", "CSS", "PHP", "XML", "Java", "C", "C#", "Python"];
+  const frame = ["Node", "Laravel", "ASP.NET", "React", "React Native", "Next", "Vite", "Django", "jQuery"];
   const db = ["MySQL", "Postgres", "Firebase", "Supabase", "Railway"];
   const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
-  const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral"];
+  const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral", "Windy.com"];
   const design = ["Figma", "Canva"];
-  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams"];
+  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams", "Expo", "Mapbox", "Expo", "PyCharm", "Webstorm", "Visual Studio 2019"];
 
   const projects = [
     {
       title: "Disaster and Risk Management System",
       technologies: "React, TypeScript, Python, Flask, BeautifulSoup4, PostgreSQL, Windy.com, Gemini, Mapbox",
-      image: "/drms.png",
+      image: "/images/drms.png",
       imageAlt: "Disaster and Risk Management System Demo",
       description: "A web application for disaster and risk management. Features Hazard, Risk, Disaster, Evacuation Sites, Weather, and more.",
       demoUrl: "/drms",
@@ -143,7 +143,7 @@ export default function Home() {
     {
       title: "Philippines Earthquake Monitoring Map",
       technologies: "React, TypeScript, Tailwind, Python, Flask, BeautifulSoup4",
-      image: "/eq.png",
+      image: "/images/eq.png",
       imageAlt: "Philippines Earthquake Monitoring Map Demo",
       description: "A map visualization of earthquake data in the Philippines. Features real-time earthquake data and a search function.",
       githubUrl: "https://github.com/KayShamir/seismic-map",
@@ -154,9 +154,9 @@ export default function Home() {
       isMobile: false,
     },
     {
-      title: "K&T Movers",
+      title: "K&T Movers: Moving Services",
       technologies: "ReactJS, TypeScript, TailwindCSS, Vite, Supabase, Mapbox",
-      image: "/ktm.png",
+      image: "/images/ktm.png",
       imageAlt: "K&T Movers Web Application",
       description: "A web application for K&T Movers. Features Moving, Storage, pick up and drop off with map routes, and more.",
       demoUrl: "/ktm",
@@ -169,7 +169,7 @@ export default function Home() {
     {
       title: "CTU Attendance and Course Management System",
       technologies: "HTML, CSS, Javascript, ASP.NET, C#, MySQL",
-      image: "/attendance.png",
+      image: "/images/attendance.png",
       imageAlt: "CTU Attendance and Course Management System Web Application",
       description: "A web application for CTU Attendance and Course Management System. Features Attendance, Course, and more.",
       demoUrl: "/attendance",
@@ -180,9 +180,9 @@ export default function Home() {
       isMobile: false,
     },
     {
-      title: "Shoes Store",
+      title: "Shoes Store: Online Shoe Shopping Platform",
       technologies: "HTML, CSS, Javascript, ASP.NET, C#, MySQL, Bootstrap, jQuery",
-      image: "/shoes.png",
+      image: "/images/shoes.png",
       imageAlt: "Shoes Store Web Application",
       description: "A web application for Shoes Store. Features Shoes, Cart, Checkout, and more.",
       demoUrl: "/shoes",
@@ -193,10 +193,10 @@ export default function Home() {
       isMobile: false,
     },
     {
-      title: "Cinephil",
+      title: "Cinephil: Movie Ticket Booking System",
       technologies: "Java",
-      image: "/cinephil.png",
-      imageAlt: "Cinephil Web Application",
+      image: "/images/cinephil.png",
+      imageAlt: "Cinephil Desktop Application",
       description: "A descktop application for cinephil. Features Movie, Theater, and more.",
       demoUrl: "/cinephil",
       githubUrl: "#",
@@ -206,9 +206,9 @@ export default function Home() {
       isMobile: false,
     },
     {
-      title: "BarangMI",
+      title: "BarangMI: Resident Request Management System",
       technologies: "React Native, TypeScript, TailwindCSS, PostgreSQL",
-      image: "/phon1.png",
+      image: "/images/phon1.png",
       imageAlt: "BarangMI Mobile Application",
       description: "A mobile application of BarangMI to manage request of the residents in a barangay.",
       demoUrl: "/hagoc",
@@ -219,10 +219,10 @@ export default function Home() {
       isMobile: true,
     },
     {
-      title: "Hagoc",
+      title: "Hagoc: Sleeping Hours Tracker",
       technologies: "React Native, TypeScript, TailwindCSS, Expo, Supabase",
-      image: "/phon2.png",
-      imageAlt: "Cinephil Web Application",
+      image: "/images/phon2.png",
+      imageAlt: "Hagoc Mobile Application",
       description: "A mobile application for sleeping hours tracking and analysis.",
       demoUrl: "/hagoc",
       githubUrl: "#",
@@ -239,49 +239,62 @@ export default function Home() {
       defaultValue: "hazard",
       icon: AlertTriangle,
       description: "Identify and monitor potential hazards in real-time. Track natural and man-made threats.",
-      image: "/hazard.png",
+      image: "/images/hazard.png",
     },
     {
       title: "Risk",
       defaultValue: "risk",
       icon: Shield,
       description: "Comprehensive risk assessment and management system. Evaluate vulnerability and exposure to various threats.",
-      image: "/risk1.png",
+      image: "/images/risk1.png",
     },
     {
       title: "Disaster",
       defaultValue: "disaster",
       icon: AlertCircle,
       description: "Handle disaster recording and keep track of affected residents. Monitor disasters and resident impact with detailed analytics.",
-      image: "/affecteds.png",
+      image: "/images/affecteds.png",
     },
     {
       title: "Evacuation Sites",
       defaultValue: "evacuation",
       icon: MapPin,
       description: "Record keeping of evacuation sites and their locations, with the ability to add evacuees during a disaster.",
-      image: "/evacuees.png",
+      image: "/images/evacuees.png",
     },
     {
       title: "Weather",
       defaultValue: "weather",
       icon: Cloud,
       description: "Live weather updates and forecasts powered by the embedded Windy.com API.",
-      image: "/weather.png",
+      image: "/images/weather.png",
     },
     {
       title: "Heatmap",
       defaultValue: "heatmap",
       icon: Layers,
       description: "Shows heatmaps of disaster and risk across barangays to easily identify vulnerable areas.",
-      image: "/heatmap.png",
+      image: "/images/heatmap.png",
     },
     {
       title: "Seismic",
       defaultValue: "seismic",
       icon: Activity,
       description: "Monitor earthquake activity and seismic events by using BeautifulSoup4 to scrape data from the Philippine Institute of Volcanology and Seismology (PHIVOLCS).",
-      image: "/seismic.png",
+      image: "/images/seismic.png",
+    },
+  ];
+
+  const certifications = [
+    {
+      title: "Friend of the Frame: Community Kickoff 2024",
+      image: "/images/frame.png",
+      description: "Participated in The Frame: Breaking into UI/UX Design.",
+    },
+    {
+      title: "Penetration Testing and Red Team Training",
+      image: "/images/sec.png",
+      description: "Completed the Penetration Testing and Red Team Training conducted by Streetlevel Ministries.",
     },
   ];
 
@@ -371,7 +384,7 @@ export default function Home() {
               </div>
               <div className="text-xs text-foreground flex flex-col space-y-1 leading-relaxed">
                 <p>
-                  I am a UI/UX design, web, and mobile development enthusiast based in Cebu City, Philippines. As a student and Associate UI/UX Lead, I enjoy turning complex problems into simple, beautiful solutions for both web and mobile platforms.
+                  I am a UI/UX designer, web, and mobile development enthusiast based in Cebu City, Philippines. As a student and Associate UI/UX Lead, I enjoy turning complex problems into simple, beautiful solutions for both web and mobile platforms.
                   I am passionate about continuous learning and always seek opportunities to expand my skill set.
                 </p>
                 <span className="opacity-60 text-xs"></span>
@@ -601,6 +614,36 @@ export default function Home() {
             */}
           </div>
         </div>
+        <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
+              <Award className="w-4 h-4 mr-1" /> Certifications
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+              {certifications.map((certification, idx) => (
+                <div key={idx} className="flex flex-col border border-secondary rounded-lg p-4 transition-all space-y-3">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-semibold text-secondary-foreground text-sm leading-tight">
+                      {certification.title}
+                    </h3>
+                  </div>
+                  <div className="flex w-full justify-center mt-2">
+                    <img 
+                      src={certification.image}
+                      alt={certification.title}
+                      className="rounded-md p-2 -mt-2 bg-secondary/50 w-full object-contain h-60 sm:h-65"
+                    />
+                  </div>
+                  <div className="text-xs text-muted-foreground mb-2 leading-relaxed">
+                    {certification.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        
       </div>
     </main>
   )
