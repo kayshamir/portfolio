@@ -122,7 +122,7 @@ export default function Home() {
   const frame = ["Node", "Laravel", "ASP.NET", "React", "Next", "RN", "Vite"];
   const db = ["MySQL", "Postgres", "Firebase", "Supabase", "Railway"];
   const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
-  const api = ["OpenMeteo", "Open Router"];
+  const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral"];
   const design = ["Figma", "Canva"];
   const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams"];
 
@@ -135,17 +135,63 @@ export default function Home() {
       description: "A map visualization of earthquake data in the Philippines. Features real-time earthquake data and a search function.",
       githubUrl: "https://github.com/KayShamir/seismic-map",
       websiteUrl: "https://seismic-map-pink.vercel.app/",
-      hasWebsite: true,
+      visitWebsite: true,
+      viewProject: false,
     },
     {
       title: "Disaster and Risk Management System",
-      technologies: "React, TypeScript, Python, Flask, BeautifulSoup4, PostgreSQL, Windy.com, OpenMeteo, Gemini 2-5 Flash",
+      technologies: "React, TypeScript, Python, Flask, BeautifulSoup4, PostgreSQL, Windy.com, Gemini, Mapbox",
       image: "/drms.png",
       imageAlt: "Disaster and Risk Management System Demo",
       description: "A web application for disaster and risk management. Features Hazard, Risk, Disaster, Evacuation Sites, Weather, and more.",
       demoUrl: "/drms",
       githubUrl: "#",
-      hasWebsite: false,
+      visitWebsite: false,
+      viewProject: true,
+    },
+    {
+      title: "K&T Movers",
+      technologies: "ReactJS, TypeScript, TailwindCSS, Vite, Supabase, Mapbox",
+      image: "/ktm.png",
+      imageAlt: "K&T Movers Web Application",
+      description: "A web application for K&T Movers. Features Moving, Storage, pick up and drop off with map routes, and more.",
+      demoUrl: "/ktm",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+    },
+    {
+      title: "CTU Attendance and Course Management System",
+      technologies: "HTML, CSS, Javascript, ASP.NET, C#, MySQL",
+      image: "/attendance.png",
+      imageAlt: "CTU Attendance and Course Management System Web Application",
+      description: "A web application for CTU Attendance and Course Management System. Features Attendance, Course, and more.",
+      demoUrl: "/attendance",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+    },
+    {
+      title: "Shoes Store",
+      technologies: "HTML, CSS, Javascript, ASP.NET, C#, MySQL, Bootstrap, jQuery",
+      image: "/shoes.png",
+      imageAlt: "Shoes Store Web Application",
+      description: "A web application for Shoes Store. Features Shoes, Cart, Checkout, and more.",
+      demoUrl: "/shoes",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+    },
+    {
+      title: "Cinephil",
+      technologies: "Java",
+      image: "/cinephil.png",
+      imageAlt: "Cinephil Web Application",
+      description: "A descktop application for cinephil. Features Movie, Theater, and more.",
+      demoUrl: "/cinephil",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
     },
   ];
 
@@ -406,7 +452,7 @@ export default function Home() {
                     <img 
                       src={project.image}
                       alt={project.imageAlt}
-                      className="rounded-md object-cover p-2 -mt-2 border bg-secondary/50"
+                      className="rounded-md object-cover p-2 -mt-2 bg-secondary/50"
                     />
                   </div>
                   <div className="text-xs text-muted-foreground mb-2 line-clamp-2 leading-relaxed">
@@ -420,7 +466,7 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="flex flex-row gap-2 items-center mt-auto">
-                    {project.hasWebsite ? (
+                    {project.visitWebsite && (
                       <a
                         href={project.websiteUrl}
                         target="_blank"
@@ -430,7 +476,8 @@ export default function Home() {
                       >
                         Visit Website <ArrowUpRight className="w-4 h-4 ml-1" />
                       </a>
-                    ) : (
+                    )}
+                    {project.viewProject && (
                       <Dialog>
                         <DialogTrigger asChild>
                           <button className="flex flex-row items-center text-xs p-1 text-secondary-foreground cursor-pointer">
