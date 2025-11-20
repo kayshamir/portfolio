@@ -75,6 +75,13 @@ export default function Home() {
         "Presented UI/UX design strategies and prototyping tools. Google Developers Group - CTU Main Campus.",
     },
     {
+      date: "November 2025",
+      title: "DevFest 2025: Volunteer",
+      description:
+        "Volunteered as Technical Team at DevFest 2025: Google Developer Group - Cebu City",
+    },
+    
+    {
       date: "February 2025",
       title: "Associate UI/UX Lead",
       description:
