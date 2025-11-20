@@ -25,6 +25,7 @@ import {
   TabsTrigger,
   TabsContent,
 } from "@/components/ui/tabs";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
@@ -649,9 +650,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         
       </div>
+      <Analytics />
     </main>
   )
 }
