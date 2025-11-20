@@ -73,7 +73,7 @@ export default function Home() {
       date: "January 2026",
       title: "UI/UX Workshop Speaker",
       description:
-        "Presented UI/UX design strategies and prototyping tools. Google Developers Group - CTU Main Campus.",
+        "Presented UI/UX design strategies and prototyping tools. GDG - CTU Main Campus.",
     },
     {
       date: "November 2025",
