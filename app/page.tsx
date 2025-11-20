@@ -124,7 +124,7 @@ export default function Home() {
   const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
   const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral", "Windy.com"];
   const design = ["Figma", "Canva"];
-  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams", "Expo", "Mapbox", "Expo", "PyCharm", "Webstorm", "Visual Studio 2019"];
+  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams", "Expo", "Mapbox", "Expo", "PyCharm", "Webstorm", "Visual Studio 2019", "Vercel"];
 
   const projects = [
     {
