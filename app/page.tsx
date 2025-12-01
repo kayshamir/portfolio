@@ -2,12 +2,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award } from "lucide-react";
+import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award, Globe, LaptopMinimal } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
 import shamir from "@/public/images/shamir.jpg";
 import { Badge } from "@/components/ui/badge";
-import { FaFacebook } from "react-icons/fa";
 import verified from "@/public/images/verified.png";
 import { 
   Dialog,
@@ -26,6 +25,7 @@ import {
   TabsContent,
 } from "@/components/ui/tabs";
 import { Analytics } from "@vercel/analytics/react";
+import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
@@ -89,18 +89,6 @@ export default function Home() {
         "Google Developers Group - CTU Main Campus",
     },
     {
-      date: "August 2024",
-      title: "UI/UX Enthusiast",
-      description:
-        "Built concept apps, practiced wireframing, and ran quick user tests.",
-    },
-    {
-      date: "March 2024",
-      title: "Friends of the Frame: Community Kickoff 2024",
-      description:
-        "Participated in The Frame: Breaking into UI/UX Design.",
-    },
-    {
       date: "August 2023",
       title: "Communications Officer",
       description:
@@ -111,12 +99,6 @@ export default function Home() {
       title: "Technical Support",
       description:
         "Amazon.com",
-    },
-    {
-      date: "May 2023",
-      title: "Student Projects",
-      description:
-        "Worked on various course projects and refined visual design fundamentals.",
     },
     {
       date: "September 2022",
@@ -345,13 +327,16 @@ export default function Home() {
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
                   <BookOpenText className="w-3 h-3" /> Student
                 </Badge>
-                <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
+                {/* <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
                   <Briefcase className="w-3 h-3" /> UI/UX Enthusiast
+                </Badge> */}
+                <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
+                  <StarHalf className="w-3 h-3" /> Associate UI/UX Lead
                 </Badge>
               </div>
               <div className="flex justify-center sm:justify-start w-full">
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
-                  <StarHalf className="w-3 h-3" /> Associate UI/UX Lead
+                  <LaptopMinimal className="w-3 h-3" /> Web and Mobile Development Enthusiast
                 </Badge>
               </div>
             </div>
@@ -465,34 +450,77 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
-            <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
-              <Briefcase className="w-4 h-4 mr-1" /> Engagements
+
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
+              <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
+                <Briefcase className="w-4 h-4 mr-1" /> Engagements
+              </div>
+              <div className="mt-2">
+                <ul className="space-y-3">
+                  {timeline.map((item, idx) => (
+                    <li key={idx} className="group grid grid-cols-[16px_1fr] gap-3 relative">
+                      <div className="relative">
+                        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px sm:w-0.5 bg-secondary" />
+                        <span
+                          className={
+                            `absolute left-1/2 -translate-x-1/2 top-1.5 w-3 h-3 rounded-full ring-2 z-10 ` +
+                            (idx === 0 ? "bg-primary" : "bg-secondary") +
+                            " ring-background group-hover:bg-primary group-hover:ring-secondary"
+                          }
+                        />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-secondary-foreground">{item.title}</div>
+                        <div className="text-xs text-foreground/80">{item.date}</div>
+                        <div className="text-xs text-foreground/80 mt-1">{item.description}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="mt-2">
-              <ul className="space-y-3">
-                {timeline.map((item, idx) => (
-                  <li key={idx} className="group grid grid-cols-[16px_1fr] gap-3 relative">
-                    <div className="relative">
-                      <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px sm:w-0.5 bg-secondary" />
-                      <span
-                        className={
-                          `absolute left-1/2 -translate-x-1/2 top-1.5 w-3 h-3 rounded-full ring-2 z-10 ` +
-                          (idx === 0 ? "bg-primary" : "bg-secondary") +
-                          " ring-background group-hover:bg-primary group-hover:ring-secondary"
-                        }
-                      />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-secondary-foreground">{item.title}</div>
-                      <div className="text-xs text-foreground/80">{item.date}</div>
-                      <div className="text-xs text-foreground/80 mt-1">{item.description}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+
+            <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
+              <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
+                <Globe className="w-4 h-4 mr-1" /> Connect with me
+              </div>
+
+              <div className="flex flex-col gap-3 text-secondary-foreground text-sm">
+                <div className="flex flex-row p-3.5 border rounded-lg">
+                  <a
+                    href="https://github.com/KayShamir"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-primary transition"
+                  >
+                    <FaGithub className="h-5 w-5" /> <span className="ml-2">Follow me on Github</span>
+                  </a>
+                </div>
+                <div className="flex flex-row p-3.5 border rounded-lg">
+                  <a
+                    href="https://www.linkedin.com/in/kay-shamir"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-primary transition"
+                  >
+                    <FaLinkedin className="h-5 w-5" /> <span className="ml-2">Connect on LinkedIn</span>
+                  </a>
+                </div>
+                <div className="flex flex-row p-3.5 border rounded-lg">
+                  <a
+                    href="https://facebook.com/kxyshxmxr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-primary transition"
+                  >
+                    <FaFacebook className="h-5 w-5" /> <span className="ml-2">Add me on Facebook</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
+          
         </div>
         <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
           <div className="flex flex-col gap-2">
