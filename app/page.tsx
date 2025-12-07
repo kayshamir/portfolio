@@ -872,13 +872,21 @@ export default function Home() {
       <button
         id="heart-button"
         onClick={handleHeart}
-        className="fixed bottom-6 right-5 md:bottom-10 md:right-10 z-50 rounded-full p-4 transition-all duration-300 hover:scale-110 active:scale-95 group"
+        className="fixed bottom-6 right-5 md:bottom-15 md:right-10 z-50 rounded-full p-4 transition-all duration-300 hover:scale-110 active:scale-95 group"
         aria-label="Send a heart"
       >
         <span className="text-4xl block group-hover:scale-110 transition-transform duration-300">
           <Heart className="w-10 h-10 text-red-500" fill="red" />
         </span>
       </button>
+      <div
+        className="fixed bottom-[5px] right-2 md:bottom-[50px] md:right-[20px] z-50 bg-background text-primary font-semibold text-xs px-3 py-1"
+        style={{
+          minWidth: "100px",
+        }}
+      >
+        Show support!
+      </div>
       {/* <div
         className="fixed bottom-2 right-6 z-50 bg-background text-foreground text-xs md:text-sm px-3 py-2 rounded-lg shadow-lg border border-secondary select-none"
         style={{
