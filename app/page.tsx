@@ -125,9 +125,6 @@ export default function Home() {
       console.error("Error posting heart:", error);
     }
   };
-  
-  console.log(visitors, hearts);
-  
 
   useEffect(() => {
     flyingHearts.forEach((heart) => {
@@ -530,8 +527,8 @@ export default function Home() {
           <div className="flex flex-col items-center md:items-end justify-between w-full gap-2 sm:gap-3 p-2">
             <div className="flex flex-col md:flex-row items-center justify-center md:justify-end gap-2 w-full">
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
-                  <span className="text-sm font-normal">Page visits: </span>
-                  <span className="text-sm font-medium flex flex-row items-center gap-1">  {visitors} <Eye className="w-4 h-4" /></span>
+                  <span className="text-xs font-normal">Page visits: </span>
+                  <span className="text-xs font-medium flex flex-row items-center gap-1">  {visitors} <Eye className="w-3 h-3" /></span>
                 </Badge>
               <div className="flex items-center gap-2">
                 <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
