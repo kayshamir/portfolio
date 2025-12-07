@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award, Globe, LaptopMinimal } from "lucide-react";
+import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award, Globe, LaptopMinimal, Eye, Heart } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
 import shamir from "@/public/images/shamir.jpg";
@@ -29,6 +29,185 @@ import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
+  const [visitors, setVisitors] = useState(0);
+  const [hearts, setHearts] = useState(0);
+  const [flyingHearts, setFlyingHearts] = useState<Array<{ id: number; startX: number; startY: number; endX: number; endY: number; direction: 'left' | 'right' }>>([]);
+  const [circles, setCircles] = useState<Array<{ id: number; x: number; y: number; size: number; color: string; angle: number; heartId: number }>>([]);
+  const [clickCount, setClickCount] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const visitorRes = await fetch("/api/visitor");
+        if (visitorRes.ok) {
+          const visitorData = await visitorRes.json();
+          setVisitors(visitorData.visitors);
+        } else {
+          console.error("Failed to fetch visitors:", visitorRes.status);
+        }
+      } catch (error) {
+        console.error("Error fetching visitors:", error);
+      }
+
+      try {
+        const heartRes = await fetch("/api/heart");
+        if (heartRes.ok) {
+          const heartData = await heartRes.json();
+          setHearts(heartData.hearts);
+        } else {
+          console.error("Failed to fetch hearts:", heartRes.status);
+        }
+      } catch (error) {
+        console.error("Error fetching hearts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
+  const handleHeart = async () => {
+    const buttonRect = document.getElementById("heart-button")?.getBoundingClientRect();
+    const profileRect = document.querySelector('[alt="Kay Shamir"]')?.getBoundingClientRect();
+    
+    if (buttonRect && profileRect) {
+      const heartId = Date.now();
+      const startX = buttonRect.left + buttonRect.width / 2;
+      const startY = buttonRect.top + buttonRect.height / 2;
+      const endX = profileRect.left + profileRect.width / 2;
+      const endY = profileRect.top + profileRect.height / 2;
+      
+      const currentClick = clickCount;
+      setClickCount(prev => prev + 1);
+      const direction = currentClick % 2 === 0 ? 'left' : 'right';
+      
+      setFlyingHearts(prev => [...prev, { id: heartId, startX, startY, endX, endY, direction }]);
+      
+      const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA', '#FCBAD3', '#FFD93D'];
+      const newCircles: Array<{ id: number; x: number; y: number; size: number; color: string; angle: number; heartId: number }> = [];
+      
+      for (let i = 0; i < 8; i++) {
+        const circleId = heartId + i;
+        const angle = (i * 45) * (Math.PI / 180); 
+        const size = 8 + Math.random() * 12; 
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        newCircles.push({
+          id: circleId,
+          x: startX,
+          y: startY,
+          size,
+          color,
+          angle,
+          heartId,
+        });
+      }
+      
+      setCircles(prev => [...prev, ...newCircles]);
+      
+      setTimeout(() => {
+        setCircles(prev => prev.filter(c => c.heartId !== heartId));
+      }, 1000);
+      
+      setTimeout(() => {
+        setFlyingHearts(prev => prev.filter(h => h.id !== heartId));
+      }, 3500);
+    }
+
+    try {
+      const res = await fetch("/api/heart", { method: "POST" });
+      if (res.ok) {
+        const data = await res.json();
+        setHearts(data.hearts);
+      } else {
+        console.error("Failed to post heart:", res.status);
+      }
+    } catch (error) {
+      console.error("Error posting heart:", error);
+    }
+  };
+  
+  console.log(visitors, hearts);
+  
+
+  useEffect(() => {
+    flyingHearts.forEach((heart) => {
+      const deltaY = Math.abs(heart.endY - heart.startY); 
+      const verticalMovement = heart.endY < heart.startY ? -deltaY : deltaY;
+      const horizontalOffset = heart.direction === 'left' ? -60 : 60; 
+      const animationName = `flyHeart${heart.id}`;
+      const styleId = `heart-animation-${heart.id}`;
+      
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          @keyframes ${animationName} {
+            0% {
+              transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+              opacity: 1;
+            }
+            50% {
+              transform: translate(-50%, -50%) translate(${horizontalOffset * 0.5}px, ${verticalMovement * 0.5}px) scale(1.3) rotate(0deg);
+              opacity: 0.9;
+            }
+            100% {
+              transform: translate(-50%, -50%) translate(${horizontalOffset}px, ${verticalMovement}px) scale(0.4) rotate(0deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+
+    return () => {
+      const existingStyles = document.querySelectorAll('[id^="heart-animation-"]');
+      existingStyles.forEach((styleEl) => {
+        const styleId = styleEl.id;
+        const heartId = parseInt(styleId.replace('heart-animation-', ''));
+        if (!flyingHearts.some(h => h.id === heartId)) {
+          styleEl.remove();
+        }
+      });
+    };
+  }, [flyingHearts]);
+
+  useEffect(() => {
+    circles.forEach((circle) => {
+      const animationName = `circleAnimation${circle.id}`;
+      const styleId = `circle-animation-${circle.id}`;
+      
+      if (!document.getElementById(styleId)) {
+        const distance = 40 + Math.random() * 30; 
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          @keyframes ${animationName} {
+            0% {
+              transform: translate(-50%, -50%) translate(0, 0) scale(1);
+              opacity: 1;
+            }
+            100% {
+              transform: translate(-50%, -50%) translate(${Math.cos(circle.angle) * distance}px, ${Math.sin(circle.angle) * distance}px) scale(0);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+
+    return () => {
+      const existingStyles = document.querySelectorAll('[id^="circle-animation-"]');
+      existingStyles.forEach((styleEl) => {
+        const styleId = styleEl.id;
+        const circleId = parseInt(styleId.replace('circle-animation-', ''));
+        if (!circles.some(c => c.id === circleId)) {
+          styleEl.remove();
+        }
+      });
+    };
+  }, [circles]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -312,6 +491,13 @@ export default function Home() {
                 sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
                 className="rounded-md border w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover absolute top-0 left-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none"
               />
+              
+              <div 
+                className="absolute bottom-0 right-0 px-2 py-1 rounded-br-md rounded-tl-sm flex items-center gap-1 bg-secondary"
+              >
+                <Heart className="w-3 h-3 text-red-500" fill="red" />
+                <span className="text-xs font-semibold text-primary">{hearts}</span>
+              </div>
             </div>
             <div className="flex flex-col gap-2 justify-start items-center sm:items-start w-full">
               <div className="flex flex-row gap-1 items-center flex-wrap justify-center sm:justify-start">
@@ -342,10 +528,16 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col items-center md:items-end justify-between w-full gap-2 sm:gap-3 p-2">
-            <div className="flex items-center justify-center md:justify-end gap-2 w-full">
-              <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
-              <Switch checked={isDark} onCheckedChange={handleThemeToggle} aria-label="Toggle theme" />
-              <Moon className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
+            <div className="flex flex-col md:flex-row items-center justify-center md:justify-end gap-2 w-full">
+                <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
+                  <span className="text-sm font-normal">Page visits: </span>
+                  <span className="text-sm font-medium flex flex-row items-center gap-1">  {visitors} <Eye className="w-4 h-4" /></span>
+                </Badge>
+              <div className="flex items-center gap-2">
+                <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
+                <Switch checked={isDark} onCheckedChange={handleThemeToggle} aria-label="Toggle theme" />
+                <Moon className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
+              </div>
             </div>
             <div className="flex flex-col md:flex-row justify-center md:justify-end gap-2 w-full">
               <Button 
@@ -634,8 +826,6 @@ export default function Home() {
               ))}
             </div>
 
-
-
             {/* 
             <div className="flex flex-col items-center justify-center py-8">
               <div className="text-4xl mb-2">💜</div>
@@ -681,6 +871,67 @@ export default function Home() {
         
       </div>
       <Analytics />
+      
+      <button
+        id="heart-button"
+        onClick={handleHeart}
+        className="fixed bottom-6 right-5 md:bottom-10 md:right-10 z-50 rounded-full p-4 transition-all duration-300 hover:scale-110 active:scale-95 group"
+        aria-label="Send a heart"
+      >
+        <span className="text-4xl block group-hover:scale-110 transition-transform duration-300">
+          <Heart className="w-10 h-10 text-red-500" fill="red" />
+        </span>
+      </button>
+      {/* <div
+        className="fixed bottom-2 right-6 z-50 bg-background text-foreground text-xs md:text-sm px-3 py-2 rounded-lg shadow-lg border border-secondary select-none"
+        style={{
+          minWidth: "170px",
+        }}
+      >
+        Show support
+      </div> */}
+
+      {flyingHearts.map((heart) => {
+        const animationName = `flyHeart${heart.id}`;
+        const heartCircles = circles.filter(c => c.heartId === heart.id);
+        
+        return (
+          <div
+            key={heart.id}
+            className="fixed pointer-events-none z-50"
+            style={{
+              left: `${heart.startX}px`,
+              top: `${heart.startY}px`,
+              transform: 'translate(-50%, -50%)',
+              animation: `${animationName} 3.5s ease-out forwards`,
+            }}
+          >
+            <div className="text-3xl relative">
+              <span className="block"><Heart className="w-6 h-6 text-red-500" fill="red" /></span>
+            </div>
+            
+            {heartCircles.map((circle) => {
+              const circleAnimationName = `circleAnimation${circle.id}`;
+              
+              return (
+                <div
+                  key={circle.id}
+                  className="absolute rounded-full pointer-events-none"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    width: `${circle.size}px`,
+                    height: `${circle.size}px`,
+                    backgroundColor: circle.color,
+                    transform: 'translate(-50%, -50%)',
+                    animation: `${circleAnimationName} 1s ease-out forwards`,
+                  }}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
     </main>
   )
 }

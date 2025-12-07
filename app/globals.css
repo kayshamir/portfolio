@@ -199,3 +199,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes rotate-x-flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-90deg) scaleY(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.rotate-x-flip {
+  animation: rotate-x-flip 0.3s ease-in-out;
+}
