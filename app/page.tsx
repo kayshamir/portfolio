@@ -489,12 +489,12 @@ export default function Home() {
                 className="rounded-md border w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover absolute top-0 left-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 pointer-events-none"
               />
               
-              <div 
+              {/* <div 
                 className="absolute bottom-0 right-0 px-2 py-1 rounded-br-md rounded-tl-sm flex items-center gap-1 bg-secondary"
               >
                 <Heart className="w-3 h-3 text-red-500" fill="red" />
                 <span className="text-xs font-semibold text-primary">{hearts}</span>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-col gap-2 justify-start items-center sm:items-start w-full">
               <div className="flex flex-row gap-1 items-center flex-wrap justify-center sm:justify-start">
@@ -503,9 +503,16 @@ export default function Home() {
                 </h1>
                 <Image src={verified} alt="Verified" width={50} height={50} className="w-4 h-4 object-cover" />
               </div>
-              <div className="text-xs text-foreground flex items-center gap-1 justify-center sm:justify-start">
-                <MapPin className="w-3 h-3" /> Cebu City, Philippines
+              <div className="text-xs text-foreground flex items-center gap-2 justify-center sm:justify-start">
+                 <div className="flex items-center gap-1">
+                   <Heart className="w-3.5 h-3.5 text-red-500" fill="red" />
+                   <span className="text-primary font-semibold">{hearts}</span>
+                 </div>
+                <div className="flex items-center gap-1">
+                  <MapPin className="w-3 h-3" /> Cebu City, Philippines
+                </div>
               </div>
+              
               <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
                   <BookOpenText className="w-3 h-3" /> Student
