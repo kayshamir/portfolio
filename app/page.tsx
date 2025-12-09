@@ -685,7 +685,7 @@ export default function Home() {
               <div className="flex flex-col gap-3 text-secondary-foreground text-sm">
                 <div className="flex flex-row p-3.5 border rounded-lg">
                   <a
-                    href="https://github.com/KayShamir"
+                    href="https://github.com/kayshamir"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-primary transition"
