@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KayShamir",
-  description: "Aspiring Developer",
+  title: "Kay Shamir L. Besin | Software Engineer",
+  description: "Software engineer and cloud and DevOps enthusiast based in Cebu City, Philippines.",
 };
 
 export default function RootLayout({

@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ArrowUpRight, BookOpenText, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award, Globe, LaptopMinimal, Eye, Heart } from "lucide-react";
+import { ArrowUpRight, Briefcase, Cpu, FolderOpen, Mail, MapPin, StarHalf, Sun, User, AlertTriangle, Shield, AlertCircle, Cloud, Layers, Activity, Star, Award, Globe, Eye, Heart, Phone, Github, Linkedin, Facebook } from "lucide-react";
 import { Moon } from "lucide-react";
 import Image from "next/image";
 import shamir from "@/public/images/shamir.jpg";
@@ -25,7 +25,6 @@ import {
   TabsContent,
 } from "@/components/ui/tabs";
 import { Analytics } from "@vercel/analytics/react";
-import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 import Snowfall from 'react-snowfall'
 
 export default function Home() {
@@ -287,13 +286,44 @@ export default function Home() {
     },
   ];
 
-  const lang = ["JS", "TS", "HTML", "CSS", "PHP", "XML", "Java", "C", "C#", "Python"];
-  const frame = ["Node", "Laravel", "ASP.NET", "React", "React Native", "Next", "Vite", "Django", "jQuery"];
-  const db = ["MySQL", "Postgres", "Firebase", "Supabase", "Railway"];
-  const ui = ["Tailwind", "Bootstrap", "ShadCN", "TweakCN", "Aceternity", "Magic UI"];
-  const api = ["OpenMeteo", "Open Router", "Gemini", "Mistral", "Windy.com"];
-  const design = ["Figma", "Canva"];
-  const tool = ["Git", "Github", "VS Code", "Notion", "Prettier", "Postman", "Discord", "Teams", "Expo", "Mapbox", "Expo", "PyCharm", "Webstorm", "Visual Studio 2019", "Vercel"];
+  const experienceTimeline = [
+    {
+      date: "July 2026 – October 2026",
+      title: "Software Engineer | Sprobe Inc.",
+      description:
+        "Experienced with Docker, AWS EC2, and GitHub Actions CI/CD, using them to deploy and maintain Puntos, a React Native/Expo mobile loyalty app with Laravel REST APIs and PostgreSQL.",
+    },
+    {
+      date: "February 2026 – May 2026",
+      title: "Software Engineer Intern | Sprobe Inc.",
+      description:
+        "Served as the technical lead for the group, coordinating implementation and supporting delivery across the team.",
+    },
+    {
+      date: "August 2025 – July 2026",
+      title: "Associate UI/UX Lead | Google Developers Group – CTU Main",
+      description:
+        "Led UI/UX initiatives for GDG CTU Main by guiding designers, organizing design activities, and mentoring junior members.",
+    },
+    {
+      date: "August 2023 – January 2024",
+      title: "Technical Support Representative | Amazon.com",
+      description:
+        "Provided remote technical support for account, platform, delivery, return, and replacement concerns.",
+    },
+  ];
+
+  const portfolioTechStack = [
+    { label: "Languages", items: ["JavaScript", "TypeScript", "PHP", "SQL", "Python", "Java", "C", "C#", "HTML/CSS"] },
+    { label: "Frameworks & Runtimes", items: ["React", "React Native", "Expo", "Next.js", "Laravel", "Node.js", "Flask", "ASP.NET"] },
+    { label: "Cloud & DevOps", items: ["AWS EC2", "Docker", "GitHub Actions", "CI/CD", "Render", "Vercel", "Netlify", "Railway"] },
+    { label: "Testing & Automation", items: ["PHPUnit", "Playwright", "Maestro", "Testim"] },
+    { label: "API Tools", items: ["Apidog", "Postman"] },
+    { label: "Databases & Backend Platforms", items: ["PostgreSQL", "SQLite", "Supabase"] },
+    { label: "Libraries & Integrations", items: ["Zustand", "React Query", "Mapbox", "Google Maps", "PayMongo"] },
+    { label: "UI & Design", items: ["Tailwind CSS", "Bootstrap", "shadcn/ui", "TweakCN", "Aceternity UI", "Magic UI", "Figma"] },
+    { label: "Development Tools", items: ["Git", "GitHub", "Vite", "VS Code", "Visual Studio", "PyCharm", "IntelliJ"] },
+  ];
 
   const projects = [
     {
@@ -373,6 +403,32 @@ export default function Home() {
       viewProject: false,
       isFavorite: false,
       isMobile: false,
+    },
+    {
+      title: "Puntos: Mobile Loyalty Application",
+      technologies: "React Native, Expo, TypeScript, Laravel, PostgreSQL, Docker, AWS EC2, GitHub Actions, Mapbox, OneSignal, Google OAuth",
+      image: "/images/puntos.png",
+      imageAlt: "Puntos mobile loyalty application",
+      description: "A mobile loyalty application for managing customer points, stamps, rewards, staff, and store branches. Built with automated testing and CI/CD workflows for reliable releases.",
+      demoUrl: "#",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+      isFavorite: true,
+      isMobile: true,
+    },
+    {
+      title: "Qourt: Mobile Application",
+      technologies: "React Native, Expo, TypeScript, SQLite",
+      image: "/images/qourt.png",
+      imageAlt: "Qourt mobile application",
+      description: "A mobile court queue management app for organizing players, court rotations, and balanced game pairings.",
+      demoUrl: "#",
+      githubUrl: "#",
+      visitWebsite: false,
+      viewProject: false,
+      isFavorite: false,
+      isMobile: true,
     },
     {
       title: "BarangMI: Resident Request Management System",
@@ -518,10 +574,18 @@ export default function Home() {
                   <MapPin className="w-3 h-3" /> Cebu City, Philippines
                 </div>
               </div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 justify-center sm:justify-start text-[11px] text-foreground/80">
+                <a href="tel:+639129003381" className="flex items-center gap-1 hover:text-primary transition">
+                  <Phone className="w-3 h-3" /> +63 912 900 3381
+                </a>
+                <a href="mailto:kayshamirbesin04@gmail.com" className="hover:text-primary transition">
+                  kayshamirbesin04@gmail.com
+                </a>
+              </div>
               
               <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
-                  <BookOpenText className="w-3 h-3" /> Student
+                  <Briefcase className="w-3 h-3" /> Software Engineer
                 </Badge>
                 {/* <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
                   <Briefcase className="w-3 h-3" /> UI/UX Enthusiast
@@ -532,7 +596,7 @@ export default function Home() {
               </div>
               <div className="flex justify-center sm:justify-start w-full">
                 <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
-                  <LaptopMinimal className="w-3 h-3" /> Web and Mobile Development Enthusiast
+                  <Cloud className="w-3 h-3" /> Cloud & DevOps Enthusiast
                 </Badge>
               </div>
             </div>
@@ -554,7 +618,7 @@ export default function Home() {
                 className="gap-2 w-full md:w-auto flex items-center justify-center cursor-pointer" 
                 onClick={() => window.open("https://m.me/kxyshxmxr", "_blank")}
               >
-                <FaFacebook /> Send a Message
+                <Facebook /> Send a Message
               </Button>
               <Button 
                 variant="secondary" 
@@ -579,18 +643,15 @@ export default function Home() {
               </div>
               <div className="text-xs text-foreground flex flex-col space-y-1 leading-relaxed">
                 <p>
-                  I am a UI/UX designer, web, and mobile development enthusiast based in Cebu City, Philippines. As a student and Associate UI/UX Lead, I enjoy turning complex problems into simple, beautiful solutions for both web and mobile platforms.
-                  I am passionate about continuous learning and always seek opportunities to expand my skill set.
+                  I am a software engineer based in Cebu City, Philippines, focused on building reliable web and mobile products. I enjoy working across frontend, backend, and deployment layers—from designing interfaces to shipping APIs and production services.
                 </p>
                 <span className="opacity-60 text-xs"></span>
                 <p>
-                  My experience includes user research, wireframing, prototyping, and front-end development. I value empathy and usability, believing that great products are built through collaboration and a focus on user experience.
-                  I strive to bridge the gap between design and development to create seamless digital experiences.
+                  At Sprobe Inc., I served as the primary developer for Puntos, a mobile loyalty application. I enjoy automation, especially CI/CD, and have had fun deploying and maintaining Dockerized services on AWS EC2 with GitHub Actions.
                 </p>
                 <span className="opacity-60 text-xs"></span>
                 <p>
-                  I love exploring new design trends and sharing knowledge with others. My goal is to contribute to meaningful projects and keep pushing my creative and technical boundaries.
-                  In my free time, I also enjoy connecting with like minded individuals and participating in community events.
+                  Beyond software engineering, I am a cloud and DevOps enthusiast who enjoys making development and release workflows more dependable. I keep learning, sharing knowledge, and turning feedback into products that are useful, maintainable, and ready to grow.
                 </p>
               </div>
             </div>
@@ -599,56 +660,18 @@ export default function Home() {
                 <Cpu className="w-4 h-4 mr-1" /> Tech Stack
               </div>
               <div className="flex flex-col gap-2">
-                <p className="font-semibold text-xs text-secondary-foreground mb-1">Languages</p>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {lang.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <p className="font-semibold text-xs text-secondary-foreground mb-1">Frameworks</p>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {frame.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <p className="font-semibold text-xs text-secondary-foreground mb-1">Databases</p>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {db.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <p className="font-semibold text-xs text-secondary-foreground mb-1">UI & Design</p>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {ui.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                  {design.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <p className="font-semibold text-xs text-secondary-foreground mb-1">APIs & Tools</p>
-                <div className="flex flex-wrap gap-2">
-                  {api.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                  {tool.map((tech, idx) => (
-                    <Badge key={idx} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
+                {portfolioTechStack.map((category) => (
+                  <div key={category.label} className="mb-2 last:mb-0">
+                    <p className="font-semibold text-xs text-secondary-foreground mb-1">{category.label}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {category.items.map((tech) => (
+                        <Badge key={tech} className="rounded-full bg-secondary text-secondary-foreground font-medium text-xs">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -656,11 +679,11 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2 border border-secondary rounded-lg p-4">
               <div className="flex flex-row items-center font-semibold text-secondary-foreground gap-1">
-                <Briefcase className="w-4 h-4 mr-1" /> Engagements
+                <Briefcase className="w-4 h-4 mr-1" /> Experience & Leadership
               </div>
               <div className="mt-2">
                 <ul className="space-y-3">
-                  {timeline.map((item, idx) => (
+                  {experienceTimeline.map((item, idx) => (
                     <li key={idx} className="group grid grid-cols-[16px_1fr] gap-3 relative">
                       <div className="relative">
                         <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px sm:w-0.5 bg-secondary" />
@@ -696,7 +719,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-primary transition"
                   >
-                    <FaGithub className="h-5 w-5" /> <span className="ml-2">Follow me on Github</span>
+                    <Github className="h-5 w-5" /> <span className="ml-2">Follow me on Github</span>
                   </a>
                 </div>
                 <div className="flex flex-row p-3.5 border rounded-lg">
@@ -706,7 +729,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-primary transition"
                   >
-                    <FaLinkedin className="h-5 w-5" /> <span className="ml-2">Connect on LinkedIn</span>
+                    <Linkedin className="h-5 w-5" /> <span className="ml-2">Connect on LinkedIn</span>
                   </a>
                 </div>
                 <div className="flex flex-row p-3.5 border rounded-lg">
@@ -716,7 +739,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-primary transition"
                   >
-                    <FaFacebook className="h-5 w-5" /> <span className="ml-2">Add me on Facebook</span>
+                    <Facebook className="h-5 w-5" /> <span className="ml-2">Add me on Facebook</span>
                   </a>
                 </div>
               </div>
@@ -743,11 +766,24 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="flex w-full justify-center mt-2">
-                    <img 
-                      src={project.image}
-                      alt={project.imageAlt}
-                      className={`rounded-md p-2 -mt-2 bg-secondary/50 w-full ${project.isMobile ? "object-contain h-60 sm:h-65" : "object-cover"}`}
-                    />
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt}
+                        className={`rounded-md p-2 -mt-2 bg-secondary/50 w-full ${project.isMobile ? "object-contain h-60 sm:h-65" : "object-cover"}`}
+                      />
+                    ) : (
+                      <div
+                        className="relative flex h-60 sm:h-65 w-full items-center justify-center overflow-hidden rounded-md border border-dashed border-secondary bg-gradient-to-br from-secondary/40 via-background to-primary/10"
+                        aria-label={project.imageAlt}
+                      >
+                        <div className="relative h-48 w-24 rounded-[1.25rem] border-4 border-secondary-foreground/30 bg-background/70 shadow-lg">
+                          <div className="absolute left-1/2 top-2 h-1 w-8 -translate-x-1/2 rounded-full bg-secondary-foreground/30" />
+                          <div className="absolute inset-x-2 top-7 bottom-5 rounded border border-dashed border-primary/30" />
+                        </div>
+                        <span className="absolute bottom-3 text-[11px] text-muted-foreground">Mobile mockup — image coming soon</span>
+                      </div>
+                    )}
                   </div>
                   <div className="text-xs text-muted-foreground mb-2 line-clamp-2 leading-relaxed">
                     {project.description}
