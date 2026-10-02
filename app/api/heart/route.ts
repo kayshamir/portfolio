@@ -1,5 +1,9 @@
-import { createClient } from "redis";
 import { NextResponse } from "next/server";
+
+/*
+Redis heart counter temporarily disabled.
+
+import { createClient } from "redis";
 
 const redis = createClient({
   url: process.env.REDIS_URL,
@@ -34,4 +38,13 @@ export async function POST(request: Request) {
 
   const hearts = await redis.get("hearts");
   return NextResponse.json({ hearts: parseInt(hearts?.toString() || "0") });
+}
+*/
+
+export async function GET() {
+  return NextResponse.json({ hearts: 0 });
+}
+
+export async function POST() {
+  return NextResponse.json({ hearts: 0 });
 }

@@ -1,5 +1,9 @@
-import { createClient } from "redis";
 import { NextResponse } from "next/server";
+
+/*
+Redis visitor counter temporarily disabled.
+
+import { createClient } from "redis";
 
 const redis = createClient({
   url: process.env.REDIS_URL,
@@ -28,4 +32,9 @@ export async function GET(request: Request) {
     console.error(error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
+}
+*/
+
+export async function GET() {
+  return NextResponse.json({ visitors: 0 });
 }

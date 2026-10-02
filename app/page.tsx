@@ -37,6 +37,8 @@ export default function Home() {
   const now = new Date();
   const isChristmasMonths = now.getMonth() >= 9 && now.getMonth() <= 12;
 
+  // Visitor and heart counters are temporarily disabled while Redis is offline.
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -66,7 +68,9 @@ export default function Home() {
 
     fetchData();
   }, []);
+  */
   
+  /*
   const handleHeart = async () => {
     const buttonRect = document.getElementById("heart-button")?.getBoundingClientRect();
     const profileRect = document.querySelector('[alt="Kay Shamir"]')?.getBoundingClientRect();
@@ -127,6 +131,7 @@ export default function Home() {
       console.error("Error posting heart:", error);
     }
   };
+  */
 
   useEffect(() => {
     flyingHearts.forEach((heart) => {
@@ -566,10 +571,12 @@ export default function Home() {
                 <Image src={verified} alt="Verified" width={50} height={50} className="w-4 h-4 object-cover" />
               </div>
               <div className="text-xs text-foreground flex items-center gap-2 justify-center sm:justify-start">
-                 <div className="flex items-center gap-1">
-                   <Heart className="w-3.5 h-3.5 text-red-500" fill="red" />
-                   <span className="text-primary font-semibold">{hearts}</span>
-                 </div>
+                {/* Temporarily hidden while Redis counters are disabled.
+                <div className="flex items-center gap-1">
+                  <Heart className="w-3.5 h-3.5 text-red-500" fill="red" />
+                  <span className="text-primary font-semibold">{hearts}</span>
+                </div>
+                */}
                 <div className="flex items-center gap-1">
                   <MapPin className="w-3 h-3" /> Cebu City, Philippines
                 </div>
@@ -603,10 +610,12 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-center md:items-end justify-between w-full gap-2 sm:gap-3 p-2">
             <div className="flex flex-col md:flex-row items-center justify-center md:justify-end gap-2 w-full">
-                <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
-                  <span className="text-xs font-normal">Page visits: </span>
-                  <span className="text-xs font-medium flex flex-row items-center gap-1">  {visitors} <Eye className="w-3 h-3" /></span>
-                </Badge>
+              {/* Temporarily hidden while Redis counters are disabled.
+              <Badge className="rounded-full bg-secondary text-secondary-foreground font-medium flex items-center gap-1">
+                <span className="text-xs font-normal">Page visits: </span>
+                <span className="text-xs font-medium flex flex-row items-center gap-1">  {visitors} <Eye className="w-3 h-3" /></span>
+              </Badge>
+              */}
               <div className="flex items-center gap-2">
                 <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-foreground" />
                 <Switch checked={isDark} onCheckedChange={handleThemeToggle} aria-label="Toggle theme" />
@@ -918,6 +927,7 @@ export default function Home() {
       </div>
       <Analytics />
       
+      {/* Temporarily hidden while Redis heart reactions are disabled.
       <button
         id="heart-button"
         onClick={handleHeart}
@@ -936,6 +946,7 @@ export default function Home() {
       >
         Show support!
       </div>
+      */}
       {/* <div
         className="fixed bottom-2 right-6 z-50 bg-background text-foreground text-xs md:text-sm px-3 py-2 rounded-lg shadow-lg border border-secondary select-none"
         style={{
